@@ -65,11 +65,11 @@ module.exports = ({ development }) => ({
       encoding: 'utf-8',
       extensions: [ ".js", ".ts" ]
     }),
-    // new CopyPlugin({
-    //   patterns: [
-    //     {from: './public',}
-    //   ]
-    // }),
+    new CopyPlugin({
+      patterns: [
+        {from: './public',}
+      ]
+    }),
     new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
     ...esLintPlugin(development),
   ],
