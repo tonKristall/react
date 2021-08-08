@@ -1,5 +1,5 @@
 {
-  "name": "react",
+  "name": "react-components",
   "scripts": {
     "build": "webpack",
     "dev": "webpack serve --env development",
@@ -25,5 +25,11 @@
     "webpack": "5.49.0",
     "webpack-cli": "4.7.2",
     "webpack-dev-server": "3.11.2"
+  },
+  "dependencies": {
+    "@types/react": "17.0.16",
+    "@types/react-dom": "17.0.9",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
   }
 }
