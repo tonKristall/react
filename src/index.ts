@@ -1,1 +1,4 @@
-document.body.innerHTML = 'test';
+import ReactDOM from "react-dom";
+import { App } from "./app";
+
+ReactDOM.render(App(), document.body);

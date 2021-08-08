@@ -32,6 +32,11 @@ module.exports = ({ development }) => ({
         exclude: /node_modules/,
       },
       {
+        test: /\.[tj]sx$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+      {
         test: /\.(?:ico|gif|png|jpg|jpeg|svg)$/i,
         type: 'asset/resource',
       },
@@ -46,7 +51,7 @@ module.exports = ({ development }) => ({
     ],
   },
   resolve: {
-    extensions: ['.ts', '.js'],
+    extensions: ['.ts', '.js', '.tsx', '.jsx'],
   },
   plugins: [
     new HtmlWebpackPlugin({
