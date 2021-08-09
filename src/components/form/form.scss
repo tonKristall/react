@@ -1,19 +1,45 @@
 @import '../../mixins.scss';
 
-.search-bar {
+.form {
     @include flex-row(center, center);
     width: 100%;
-    height: 100px;
+    height: 400px;
   }
   
-  .search-bar__wrapper {
+  .form__wrapper {
     @include flex-row(center, center);
+    padding: 10px 30px;
     width: 100%;
     max-width: 500px;
-    height: 30px;
+    height: 300px;
     background-color: #fff;
     border: 5px solid #b0bb46;
     border-radius: 20px;
+  }
+
+  .form__form {
+    @include flex-column(space-between, center);
+    width: 100%;
+    height: 100%;
+
+    label,
+    input,
+    select {
+      width: 100%;
+    }
+
+    input,
+    select {
+      height: 20px;
+    }
+    
+    label {
+      text-transform: capitalize;
+    }
+
+    select {
+      display: block;
+    }
   }
   
   .search-bar__input {

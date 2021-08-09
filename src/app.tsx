@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CardsContainer from './components/cards/cards';
-import SearchBar from './components/search-bar/search-bar';
+import Form from './components/form/form';
 import './styles.scss';
 
-export default function App():JSX.Element {
-  return <div className='app-container'>
-    <SearchBar />
-    <CardsContainer />
-  </div>;
+function Container(): JSX.Element {
+  const [UsersData, setUsersData] = useState([]);
+  return (
+    <div className="app-container">
+      <Form setUsersData={setUsersData} />
+      <CardsContainer UsersData={UsersData} />
+    </div>
+  );
+}
+
+export default function App(): JSX.Element {
+  return <Container />;
 }
