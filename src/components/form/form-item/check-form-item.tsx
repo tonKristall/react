@@ -1,10 +1,11 @@
 import React from 'react';
-import { IFormBooleanItemProps } from '../form';
+import { IFormRequiredBooleanItemProps } from '../form';
+import InvalidField from './invalid-field';
 
-export default function CheckFormItem(props: IFormBooleanItemProps): JSX.Element {
+export default function CheckFormItem(props: IFormRequiredBooleanItemProps): JSX.Element {
   return (
     <label htmlFor="subscribe">
-      <span>subscribe:</span>
+      <span className="name-field">subscribe:</span>
       <input
         type="checkbox"
         name="subscribe"
@@ -13,6 +14,7 @@ export default function CheckFormItem(props: IFormBooleanItemProps): JSX.Element
           props.setValue((prev) => !prev);
         }}
       />
+      <InvalidField errors={props.errors} nameItem={props.nameItem} />
     </label>
   );
 }

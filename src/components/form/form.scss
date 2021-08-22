@@ -1,4 +1,4 @@
-@import "../../mixins.scss";
+@import '../../mixins.scss';
 
 .form {
   @include flex-row(center, center);
@@ -28,10 +28,10 @@
     flex-wrap: wrap;
     text-transform: capitalize;
 
-    span {
-      display: inline-block;
-      width: 80px;
-    }
+    // span {
+    //   display: inline-block;
+    //   width: 80px;
+    // }
   }
 
   input,
@@ -52,6 +52,16 @@
       }
     }
   }
+}
+
+.name-field {
+  display: inline-block;
+  width: 80px;
+}
+.invalid-field {
+  width: 100%;
+  text-transform: none;
+  color: red;
 }
 
 .input-text {

@@ -1,10 +1,11 @@
 import React from 'react';
-import { IFormStringItemProps } from '../form';
+import { IFormRequiredStringItemProps } from '../form';
+import InvalidField from './invalid-field';
 
-export default function DateFormItem(props: IFormStringItemProps): JSX.Element {
+export default function DateFormItem(props: IFormRequiredStringItemProps): JSX.Element {
   return (
     <label htmlFor={props.nameItem}>
-      <span>{props.nameItem}:</span>
+      <span className="name-field">{props.nameItem}:</span>
       <input
         type="date"
         name={props.nameItem}
@@ -13,6 +14,7 @@ export default function DateFormItem(props: IFormStringItemProps): JSX.Element {
           props.setValue(event.target.value);
         }}
       />
+      <InvalidField errors={props.errors} nameItem={props.nameItem} />
     </label>
   );
 }

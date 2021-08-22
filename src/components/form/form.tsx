@@ -1,25 +1,34 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, {
+  Dispatch, SetStateAction, useEffect, useState,
+} from 'react';
 import './form.scss';
 import TextFormItem from './form-item/text-form-item';
 import SwitchFormItem from './form-item/switch-form-item';
 import DateFormItem from './form-item/date-form-item';
 import SelectFormItem from './form-item/select-form-item';
 import CheckFormItem from './form-item/check-form-item';
+import Validate from '../../service/validation/validation';
 
 interface IFormProps {
   setUsersData: Dispatch<SetStateAction<Record<string, unknown>[]>>;
 }
-
 export interface IFormStringItemProps {
-  value: string,
-  setValue: Dispatch<SetStateAction<string>>,
-  nameItem: string,
+  value: string;
+  setValue: Dispatch<SetStateAction<string>>;
+  nameItem: string;
 }
-
 export interface IFormBooleanItemProps {
-  value: boolean,
-  setValue: Dispatch<SetStateAction<boolean>>,
-  nameItem: string,
+  value: boolean;
+  setValue: Dispatch<SetStateAction<boolean>>;
+  nameItem: string;
+}
+export interface IFormRequiredStringItemProps extends IFormStringItemProps {
+  errors: Record<string, unknown>;
+  setErrors: Dispatch<SetStateAction<Record<string, unknown>>>;
+}
+export interface IFormRequiredBooleanItemProps extends IFormBooleanItemProps {
+  errors: Record<string, unknown>;
+  setErrors: Dispatch<SetStateAction<Record<string, unknown>>>;
 }
 
 export default function Form(props: IFormProps): JSX.Element {
@@ -37,19 +46,31 @@ export default function Form(props: IFormProps): JSX.Element {
   const [birthdate, setBirthdate] = useState('');
   const [country, setCountry] = useState('Russia');
   const [subscribe, setSubscribe] = useState(true);
+  const [errors, setErrors] = useState({});
+
+  const requiredFields = {
+    name, surname, birthdate, subscribe,
+  };
+
+  useEffect(() => {
+    Validate(setErrors, requiredFields);
+  }, Object.values(requiredFields));
+
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    props.setUsersData((state: Record<string, unknown>[]) => [
-      ...state,
-      {
-        name,
-        surname,
-        gender,
-        birthdate,
-        country,
-        subscribe,
-      },
-    ]);
+    if (!Object.keys(errors).length) {
+      props.setUsersData((state: Record<string, unknown>[]) => [
+        ...state,
+        {
+          name,
+          surname,
+          gender,
+          birthdate,
+          country,
+          subscribe,
+        },
+      ]);
+    }
   };
 
   return (
@@ -60,11 +81,15 @@ export default function Form(props: IFormProps): JSX.Element {
             value={name}
             setValue={setName}
             nameItem={formItemsNames.nameItem}
+            errors={errors}
+            setErrors={setErrors}
           />
           <TextFormItem
             value={surname}
             setValue={setSurname}
             nameItem={formItemsNames.surnameItem}
+            errors={errors}
+            setErrors={setErrors}
           />
           <SwitchFormItem
             value={gender}
@@ -75,6 +100,8 @@ export default function Form(props: IFormProps): JSX.Element {
             value={birthdate}
             setValue={setBirthdate}
             nameItem={formItemsNames.birthdateItem}
+            errors={errors}
+            setErrors={setErrors}
           />
           <SelectFormItem
             value={country}
@@ -85,6 +112,8 @@ export default function Form(props: IFormProps): JSX.Element {
             value={subscribe}
             setValue={setSubscribe}
             nameItem={formItemsNames.subscribeItem}
+            errors={errors}
+            setErrors={setErrors}
           />
           <div>
             <input className="form__button" type="submit" value="Send" />

@@ -4,7 +4,7 @@ import { IFormStringItemProps } from '../form';
 export default function SwitchFormItem(props: IFormStringItemProps): JSX.Element {
   return (
     <label htmlFor={props.nameItem}>
-      <span>{props.nameItem}:</span>
+      <span className="name-field">{props.nameItem}:</span>
       <input
         className="switch"
         type="checkbox"
