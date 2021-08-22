@@ -1,7 +1,7 @@
 import React from 'react';
-import { IFormStringItemProps } from '../form';
+import { IFormItemProps } from '../form';
 
-export default function SwitchFormItem(props: IFormStringItemProps): JSX.Element {
+export default function SwitchFormItem(props: IFormItemProps): JSX.Element {
   return (
     <label htmlFor={props.nameItem}>
       <span className="name-field">{props.nameItem}:</span>
@@ -9,9 +9,11 @@ export default function SwitchFormItem(props: IFormStringItemProps): JSX.Element
         className="switch"
         type="checkbox"
         name={props.nameItem}
-        value={props.value}
+        value={props.value[props.nameItem] as string}
         onChange={() => {
-          props.setValue((prev) => (prev === 'Male' ? 'Female' : 'Male'));
+          let value = props.value[props.nameItem] ==="Male" ? "Female" : "Male";
+          props.setValue({ ...props.value, [props.nameItem]: value });
+          // props.setValue((props.value) => (prev === 'Male' ? 'Female' : 'Male'));
         }}
       />
     </label>

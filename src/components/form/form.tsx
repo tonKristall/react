@@ -1,117 +1,105 @@
-import React, {
-  Dispatch, SetStateAction, useEffect, useState,
-} from 'react';
-import './form.scss';
-import TextFormItem from './form-item/text-form-item';
-import SwitchFormItem from './form-item/switch-form-item';
-import DateFormItem from './form-item/date-form-item';
-import SelectFormItem from './form-item/select-form-item';
-import CheckFormItem from './form-item/check-form-item';
-import Validate from '../../service/validation/validation';
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import "./form.scss";
+import TextFormItem from "./form-item/text-form-item";
+import SwitchFormItem from "./form-item/switch-form-item";
+import DateFormItem from "./form-item/date-form-item";
+import SelectFormItem from "./form-item/select-form-item";
+import CheckFormItem from "./form-item/check-form-item";
+import Validate from "../../service/validation/validation";
+
+const DEFAULT_DATA_FORM: Record<string, unknown> = {
+  name: "",
+  surname: "",
+  gender: "Male",
+  birthdate: "",
+  country: "Russia",
+  subscribe: true
+};
+
+const FORM_ITEMS_NAMES = {
+  nameItem: "name",
+  surnameItem: "surname",
+  genderItem: "gender",
+  birthdateItem: "birthdate",
+  countryItem: "country",
+  subscribeItem: "subscribe"
+};
 
 interface IFormProps {
   setUsersData: Dispatch<SetStateAction<Record<string, unknown>[]>>;
 }
-export interface IFormStringItemProps {
-  value: string;
-  setValue: Dispatch<SetStateAction<string>>;
+export interface IFormItemProps {
+  value: Record<string, unknown>;
+  setValue: Dispatch<SetStateAction<Record<string, unknown>>>;
   nameItem: string;
 }
-export interface IFormBooleanItemProps {
-  value: boolean;
-  setValue: Dispatch<SetStateAction<boolean>>;
-  nameItem: string;
-}
-export interface IFormRequiredStringItemProps extends IFormStringItemProps {
-  errors: Record<string, unknown>;
-  setErrors: Dispatch<SetStateAction<Record<string, unknown>>>;
-}
-export interface IFormRequiredBooleanItemProps extends IFormBooleanItemProps {
+export interface IFormRequiredItemProps extends IFormItemProps {
   errors: Record<string, unknown>;
   setErrors: Dispatch<SetStateAction<Record<string, unknown>>>;
 }
 
 export default function Form(props: IFormProps): JSX.Element {
-  const formItemsNames = {
-    nameItem: 'name',
-    surnameItem: 'surname',
-    genderItem: 'gender',
-    birthdateItem: 'birthdate',
-    countryItem: 'country',
-    subscribeItem: 'subscribe',
-  };
-  const [name, setName] = useState('');
-  const [surname, setSurname] = useState('');
-  const [gender, setGender] = useState('Male');
-  const [birthdate, setBirthdate] = useState('');
-  const [country, setCountry] = useState('Russia');
-  const [subscribe, setSubscribe] = useState(true);
+  const [dataForm, setDataForm] = useState(DEFAULT_DATA_FORM);
+
   const [errors, setErrors] = useState({});
 
   const requiredFields = {
-    name, surname, birthdate, subscribe,
+    name: dataForm.name,
+    surname: dataForm.surname,
+    birthdate: dataForm.birthdate,
+    subscribe: dataForm.subscribe
+  };
+
+  const handleSubmit = (event: { preventDefault: () => void }) => {
+    event.preventDefault();
+    if (!Object.keys(errors).length) {
+      props.setUsersData((state: Record<string, unknown>[]) => [...state, dataForm]);
+    }
   };
 
   useEffect(() => {
     Validate(setErrors, requiredFields);
   }, Object.values(requiredFields));
 
-  const handleSubmit = (event: { preventDefault: () => void }) => {
-    event.preventDefault();
-    if (!Object.keys(errors).length) {
-      props.setUsersData((state: Record<string, unknown>[]) => [
-        ...state,
-        {
-          name,
-          surname,
-          gender,
-          birthdate,
-          country,
-          subscribe,
-        },
-      ]);
-    }
-  };
-
   return (
     <div className="form">
       <div className="form__wrapper">
         <form className="form__form" onSubmit={handleSubmit}>
           <TextFormItem
-            value={name}
-            setValue={setName}
-            nameItem={formItemsNames.nameItem}
+            value={dataForm}
+            setValue={setDataForm}
+            nameItem={FORM_ITEMS_NAMES.nameItem}
             errors={errors}
             setErrors={setErrors}
           />
           <TextFormItem
-            value={surname}
-            setValue={setSurname}
-            nameItem={formItemsNames.surnameItem}
+            value={dataForm}
+            setValue={setDataForm}
+            nameItem={FORM_ITEMS_NAMES.surnameItem}
             errors={errors}
             setErrors={setErrors}
           />
           <SwitchFormItem
-            value={gender}
-            setValue={setGender}
-            nameItem={formItemsNames.genderItem}
+            value={dataForm}
+            setValue={setDataForm}
+            nameItem={FORM_ITEMS_NAMES.genderItem}
           />
           <DateFormItem
-            value={birthdate}
-            setValue={setBirthdate}
-            nameItem={formItemsNames.birthdateItem}
+            value={dataForm}
+            setValue={setDataForm}
+            nameItem={FORM_ITEMS_NAMES.birthdateItem}
             errors={errors}
             setErrors={setErrors}
           />
           <SelectFormItem
-            value={country}
-            setValue={setCountry}
-            nameItem={formItemsNames.countryItem}
+            value={dataForm}
+            setValue={setDataForm}
+            nameItem={FORM_ITEMS_NAMES.countryItem}
           />
           <CheckFormItem
-            value={subscribe}
-            setValue={setSubscribe}
-            nameItem={formItemsNames.subscribeItem}
+            value={dataForm}
+            setValue={setDataForm}
+            nameItem={FORM_ITEMS_NAMES.subscribeItem}
             errors={errors}
             setErrors={setErrors}
           />
