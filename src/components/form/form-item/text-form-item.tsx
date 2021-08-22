@@ -12,7 +12,7 @@ export default function TextFormItem(props: IFormRequiredItemProps): JSX.Element
         name={props.nameItem}
         value={props.value[props.nameItem] as string}
         onChange={(event) => {
-          props.setValue({...props.value, [props.nameItem]: event.target.value});
+          props.setValue({ ...props.value, [props.nameItem]: event.target.value });
         }}
       />
       <InvalidField errors={props.errors} nameItem={props.nameItem} />

@@ -1,7 +1,7 @@
-import React from "react";
-import { IFormRequiredItemProps } from "../form";
+import React from 'react';
+import { IFormRequiredItemProps } from '../form';
 
-import InvalidField from "./invalid-field";
+import InvalidField from './invalid-field';
 
 export default function CheckFormItem(props: IFormRequiredItemProps): JSX.Element {
   return (
@@ -13,7 +13,6 @@ export default function CheckFormItem(props: IFormRequiredItemProps): JSX.Elemen
         checked={props.value[props.nameItem] as boolean}
         onChange={() => {
           props.setValue({ ...props.value, [props.nameItem]: !props.value[props.nameItem] });
-          console.log(props.value);
         }}
       />
       <InvalidField errors={props.errors} nameItem={props.nameItem} />

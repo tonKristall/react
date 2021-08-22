@@ -1,28 +1,30 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import "./form.scss";
-import TextFormItem from "./form-item/text-form-item";
-import SwitchFormItem from "./form-item/switch-form-item";
-import DateFormItem from "./form-item/date-form-item";
-import SelectFormItem from "./form-item/select-form-item";
-import CheckFormItem from "./form-item/check-form-item";
-import Validate from "../../service/validation/validation";
+import React, {
+  Dispatch, SetStateAction, useEffect, useState,
+} from 'react';
+import './form.scss';
+import TextFormItem from './form-item/text-form-item';
+import SwitchFormItem from './form-item/switch-form-item';
+import DateFormItem from './form-item/date-form-item';
+import SelectFormItem from './form-item/select-form-item';
+import CheckFormItem from './form-item/check-form-item';
+import Validate from '../../service/validation/validation';
 
 const DEFAULT_DATA_FORM: Record<string, unknown> = {
-  name: "",
-  surname: "",
-  gender: "Male",
-  birthdate: "",
-  country: "Russia",
-  subscribe: true
+  name: '',
+  surname: '',
+  gender: 'Male',
+  birthdate: '',
+  country: 'Russia',
+  subscribe: true,
 };
 
 const FORM_ITEMS_NAMES = {
-  nameItem: "name",
-  surnameItem: "surname",
-  genderItem: "gender",
-  birthdateItem: "birthdate",
-  countryItem: "country",
-  subscribeItem: "subscribe"
+  nameItem: 'name',
+  surnameItem: 'surname',
+  genderItem: 'gender',
+  birthdateItem: 'birthdate',
+  countryItem: 'country',
+  subscribeItem: 'subscribe',
 };
 
 interface IFormProps {
@@ -47,7 +49,7 @@ export default function Form(props: IFormProps): JSX.Element {
     name: dataForm.name,
     surname: dataForm.surname,
     birthdate: dataForm.birthdate,
-    subscribe: dataForm.subscribe
+    subscribe: dataForm.subscribe,
   };
 
   const handleSubmit = (event: { preventDefault: () => void }) => {

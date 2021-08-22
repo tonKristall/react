@@ -11,7 +11,7 @@ export default function SwitchFormItem(props: IFormItemProps): JSX.Element {
         name={props.nameItem}
         value={props.value[props.nameItem] as string}
         onChange={() => {
-          let value = props.value[props.nameItem] ==="Male" ? "Female" : "Male";
+          const value = props.value[props.nameItem] === 'Male' ? 'Female' : 'Male';
           props.setValue({ ...props.value, [props.nameItem]: value });
           // props.setValue((props.value) => (prev === 'Male' ? 'Female' : 'Male'));
         }}
