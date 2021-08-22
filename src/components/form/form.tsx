@@ -56,6 +56,7 @@ export default function Form(props: IFormProps): JSX.Element {
     event.preventDefault();
     if (!Object.keys(errors).length) {
       props.setUsersData((state: Record<string, unknown>[]) => [...state, dataForm]);
+      setDataForm(DEFAULT_DATA_FORM);
     }
   };
 
