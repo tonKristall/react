@@ -2,6 +2,7 @@ import React, { ChangeEvent, useState } from 'react';
 import { SEARCH_DATA_DEFAULT } from '../../const';
 import Validation from '../../services/validate';
 import { ISearchBarProps } from '../../types';
+import RequestParams from '../request-params/request-params';
 import './search-bar.scss';
 
 export default function SearchBar(props: ISearchBarProps): JSX.Element {
@@ -30,7 +31,8 @@ export default function SearchBar(props: ISearchBarProps): JSX.Element {
           {!searchData.loading ? 'search' : 'loading'}
         </button>
       </form>
-      <span className="invalid-validation">{!validate && 'It\'s required field'} </span>
+      <span className="invalid-validation">{!validate && "It's required field"} </span>
+      <RequestParams searchData={searchData} setSearchData={setSearchData} />
     </div>
   );
 }

@@ -6,11 +6,11 @@ export default function ResponseAPI(
   searchData: typeof SEARCH_DATA_DEFAULT,
   setResultSearch: SetStateArrayType,
 ): void {
-  setSearchData({ ...searchData, value: SEARCH_DATA_DEFAULT.value });
+  // setSearchData({ ...searchData, value: SEARCH_DATA_DEFAULT.value });
   setSearchData({ ...searchData, loading: !SEARCH_DATA_DEFAULT.loading });
   const searchValue = searchData.value;
-  const { sort } = searchData;
-  const response = `${BASE_URL}?q=${searchValue}&sort=${sort}&apiKey=${API_KEY}`;
+  const sortValue = searchData.sortArticle;
+  const response = `${BASE_URL}?q=${searchValue}&sortBy=${sortValue}&apiKey=${API_KEY}`;
   fetch(response)
     .then((resp) => resp.json())
     .then((resp: TResultSearch) => setResultSearch(resp.articles))

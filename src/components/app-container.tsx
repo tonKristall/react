@@ -6,6 +6,7 @@ import { IArticle } from '../types';
 
 export default function AppContainer(): JSX.Element {
   const [resultSearch, setResultSearch] = useState<IArticle[]>([]);
+
   return (
     <div className="app-container">
       <SearchBar setResultSearch={setResultSearch} />

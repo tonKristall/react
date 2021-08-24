@@ -1,5 +1,9 @@
 import { SEARCH_DATA_DEFAULT } from '../const';
-import { SetStateArrayType, SetStateBooleanType, SetStateSearchDataType } from '../types';
+import {
+  SetStateArrayType,
+  SetStateBooleanType,
+  SetStateSearchDataType,
+} from '../types';
 import ResponseAPI from './response-api';
 
 export default function Validation(
