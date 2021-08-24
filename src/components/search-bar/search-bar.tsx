@@ -1,15 +1,16 @@
 import React, { ChangeEvent, useState } from 'react';
 import { SEARCH_DATA_DEFAULT } from '../../const';
 import Validation from '../../services/validate';
+import { ISearchBarProps } from '../../types';
 import './search-bar.scss';
 
-export default function SearchBar(): JSX.Element {
+export default function SearchBar(props: ISearchBarProps): JSX.Element {
   const [searchData, setSearchData] = useState(SEARCH_DATA_DEFAULT);
   const [validate, setValidate] = useState(true);
 
   const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-    Validation(searchData, setValidate, setSearchData);
+    Validation(searchData, setValidate, setSearchData, props.setResultSearch);
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {

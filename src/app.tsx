@@ -1,11 +1,8 @@
 import React from 'react';
-import SearchBar from './components/search-bar/search-bar';
-import './styles.scss';
+import AppContainer from './components/app-container';
 
 export default function App(): JSX.Element {
   return (
-    <div className="app-container">
-      <SearchBar />
-    </div>
+    <AppContainer />
   );
 }
