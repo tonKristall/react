@@ -5,5 +5,6 @@ export const SEARCH_DATA_DEFAULT = {
   value: '',
   loading: false,
   sortArticle: 'publishedAt',
-  articlesOnPage: '10',
+  pageSize: '10',
+  currentPage: '1',
 };

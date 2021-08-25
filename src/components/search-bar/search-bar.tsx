@@ -32,7 +32,11 @@ export default function SearchBar(props: ISearchBarProps): JSX.Element {
         </button>
       </form>
       <span className="invalid-validation">{!validate && "It's required field"} </span>
-      <RequestParams searchData={searchData} setSearchData={setSearchData} />
+      <RequestParams
+        searchData={searchData}
+        setSearchData={setSearchData}
+        setResultSearch={props.setResultSearch}
+      />
     </div>
   );
 }

@@ -31,18 +31,21 @@ export interface ISearchBarProps {
   setResultSearch: Dispatch<SetStateAction<IArticle[]>>;
 }
 
-export enum SortValues {
-  published = 'publishedAt',
-  relevancy = 'relevancy',
-  popularity = 'popularity',
+export enum ESortValues {
+  published = 'PublishedAt',
+  relevancy = 'Relevancy',
+  popularity = 'Popularity',
 }
 
-// export type TRequestParams = {
-//   sortArticle: string;
-//   articlesOnPage: string;
-// };
+export enum EPageSizeValues {
+  ten = '10',
+  twenty = '20',
+  fifty = '50',
+  hundred = '100',
+}
 
 export interface IRequestParamsProps {
   searchData: typeof SEARCH_DATA_DEFAULT;
   setSearchData: SetStateSearchDataType;
+  setResultSearch: Dispatch<SetStateAction<IArticle[]>>;
 }

@@ -10,7 +10,9 @@ export default function ResponseAPI(
   setSearchData({ ...searchData, loading: !SEARCH_DATA_DEFAULT.loading });
   const searchValue = searchData.value;
   const sortValue = searchData.sortArticle;
-  const response = `${BASE_URL}?q=${searchValue}&sortBy=${sortValue}&apiKey=${API_KEY}`;
+  const pageSizeValue = searchData.pageSize;
+  const { currentPage } = searchData;
+  const response = `${BASE_URL}?q=${searchValue}&sortBy=${sortValue}&pageSize=${pageSizeValue}&page=${currentPage}&apiKey=${API_KEY}`;
   fetch(response)
     .then((resp) => resp.json())
     .then((resp: TResultSearch) => setResultSearch(resp.articles))
