@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import RenderResultSearch from './result-search/result-search';
-import SearchBar from './search-bar/search-bar';
-import '../styles.scss';
-import { SEARCH_DATA_DEFAULT, SEARCH_RESULT_DEFAULT } from '../const';
-import ResponseAPI from '../services/response-api';
-import Header from './header/header';
+import React, { useEffect, useState } from "react";
+import RenderResultSearch from "./result-search/result-search";
+import SearchBar from "./search-bar/search-bar";
+import "../styles.scss";
+import { SEARCH_DATA_DEFAULT, SEARCH_RESULT_DEFAULT } from "../const";
+import ResponseAPI from "../services/response-api";
+import Header from "./header/header";
+import {BrowserRouter as Router} from 'react-router-dom';
 
 export default function AppContainer(): JSX.Element {
   const [resultSearch, setResultSearch] = useState(SEARCH_RESULT_DEFAULT);
@@ -17,15 +18,17 @@ export default function AppContainer(): JSX.Element {
   }, [searchData.currentPage, searchData.pageSize, searchData.sortArticle]);
 
   return (
-    <div className="app-container">
-      <Header />
-      <SearchBar
-        searchData={searchData}
-        setSearchData={setSearchData}
-        resultSearch={resultSearch}
-        setResultSearch={setResultSearch}
-      />
-      <RenderResultSearch SearchData={searchData} SetSearchData={setSearchData} ResultSearch={resultSearch} />
-    </div>
+    <Router>
+      <div className="app-container">
+        <Header />
+        <SearchBar
+          searchData={searchData}
+          setSearchData={setSearchData}
+          resultSearch={resultSearch}
+          setResultSearch={setResultSearch}
+        />
+        <RenderResultSearch SearchData={searchData} SetSearchData={setSearchData} ResultSearch={resultSearch} />
+      </div>
+    </Router>
   );
 }
