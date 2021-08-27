@@ -4,6 +4,7 @@ import SearchBar from './search-bar/search-bar';
 import '../styles.scss';
 import { SEARCH_DATA_DEFAULT, SEARCH_RESULT_DEFAULT } from '../const';
 import ResponseAPI from '../services/response-api';
+import Header from './header/header';
 
 export default function AppContainer(): JSX.Element {
   const [resultSearch, setResultSearch] = useState(SEARCH_RESULT_DEFAULT);
@@ -17,6 +18,7 @@ export default function AppContainer(): JSX.Element {
 
   return (
     <div className="app-container">
+      <Header />
       <SearchBar
         searchData={searchData}
         setSearchData={setSearchData}

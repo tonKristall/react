@@ -1,0 +1,25 @@
+@import '../../mixins.scss';
+
+.header {
+  ul {
+    @include flex-row(space-between, center);
+    width: 200px;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  li {
+    padding: 0;
+    text-transform: capitalize;
+    font-size: 24px;
+  }
+
+  .link {
+    text-decoration: none;
+    color: black
+  }
+
+  .link__active {
+    color: rgb(0, 47, 255);
+  }
+}
