@@ -1,13 +1,15 @@
 import React from 'react';
-import { EPageSizeValues, ESortValues, IRequestParamsProps } from '../../types';
+import { EPageSizeValues, ESortValues, SEARCH_DATA_DEFAULT } from '../../const';
+import { ISearchRequestProps } from '../../types';
 import './request-params.scss';
 
-export default function RequestParams(props: IRequestParamsProps): JSX.Element {
+export default function RequestParams(props: ISearchRequestProps): JSX.Element {
   return (
     <div className="request-params">
       <div className="request-params__sort">
         <p>Sort:</p>
         <select
+          disabled={props.searchData.loading}
           onChange={(event) => {
             props.setSearchData({
               ...props.searchData,
@@ -23,10 +25,13 @@ export default function RequestParams(props: IRequestParamsProps): JSX.Element {
       <div className="request-params__articles-on-page">
         <p>articles on page:</p>
         <select
+          disabled={props.searchData.loading}
           onChange={(event) => {
             props.setSearchData({
               ...props.searchData,
               pageSize: event.target.value,
+              currentPage: SEARCH_DATA_DEFAULT.currentPage,
+              inputPage: SEARCH_DATA_DEFAULT.inputPage,
             });
           }}
         >

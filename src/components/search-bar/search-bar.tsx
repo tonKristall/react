@@ -1,21 +1,20 @@
 import React, { ChangeEvent, useState } from 'react';
-import { SEARCH_DATA_DEFAULT } from '../../const';
 import Validation from '../../services/validate';
-import { ISearchBarProps } from '../../types';
+import { ISearchRequestProps } from '../../types';
 import RequestParams from '../request-params/request-params';
 import './search-bar.scss';
 
-export default function SearchBar(props: ISearchBarProps): JSX.Element {
-  const [searchData, setSearchData] = useState(SEARCH_DATA_DEFAULT);
+export default function SearchBar(props: ISearchRequestProps): JSX.Element {
   const [validate, setValidate] = useState(true);
-
   const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-    Validation(searchData, setValidate, setSearchData, props.setResultSearch);
+    if (!props.searchData.loading) {
+      Validation(props.searchData, setValidate, props.setSearchData, props.setResultSearch, props.resultSearch);
+    }
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearchData({ ...searchData, value: event.target.value });
+    props.setSearchData({ ...props.searchData, value: event.target.value });
   };
 
   return (
@@ -25,16 +24,18 @@ export default function SearchBar(props: ISearchBarProps): JSX.Element {
           id="search"
           type="text"
           className="search-bar__input"
+          disabled={props.searchData.loading}
           onChange={handleChange}
         ></input>
         <button className="search-bar__button" type="submit">
-          {!searchData.loading ? 'search' : 'loading'}
+          {!props.searchData.loading ? 'search' : 'loading'}
         </button>
       </form>
       <span className="invalid-validation">{!validate && "It's required field"} </span>
       <RequestParams
-        searchData={searchData}
-        setSearchData={setSearchData}
+        searchData={props.searchData}
+        setSearchData={props.setSearchData}
+        resultSearch={props.resultSearch}
         setResultSearch={props.setResultSearch}
       />
     </div>

@@ -1,6 +1,7 @@
 @import '../../mixins.scss';
 
 .result-search {
+  margin-top: 50px;
   width: 100%;
 
   &__table {
@@ -30,4 +31,8 @@
   img {
     width: 200px;
   }
+}
+
+.error-response {
+  color: red;
 }
