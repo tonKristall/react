@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from 'react';
 // eslint-disable-next-line import/no-cycle
-import { SEARCH_DATA_DEFAULT } from "./const";
+import { SEARCH_DATA_DEFAULT } from './const';
 
 export type TSetStateBoolean = Dispatch<SetStateAction<boolean>>;
 

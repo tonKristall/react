@@ -17,12 +17,20 @@ export default function ResponseAPI(
   fetch(response)
     .then((resp) => resp.json())
     .then((resp: IResultSearch) => {
-      setResultSearch({
-        error: false,
-        articles: resp.articles,
-      });
+      if (resp.articles) {
+        setResultSearch({
+          error: false,
+          articles: resp.articles,
+        });
+      } else {
+        setResultSearch({
+          error: true,
+          articles: resultSearch.articles,
+        });
+      }
     })
     .catch(() => {
+      console.log(`error${resultSearch.articles}`);
       setResultSearch({
         error: true,
         articles: resultSearch.articles,
