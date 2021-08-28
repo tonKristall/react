@@ -16,10 +16,12 @@
 
   .link {
     text-decoration: none;
-    color: black
+    color: black;
   }
-
+  
   .link__active {
     color: rgb(0, 47, 255);
+    cursor: default;
+
   }
 }

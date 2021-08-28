@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from 'react';
 // eslint-disable-next-line import/no-cycle
-import { SEARCH_DATA_DEFAULT } from "./const";
+import { SEARCH_DATA_DEFAULT } from './const';
 
 export type TSetStateBoolean = Dispatch<SetStateAction<boolean>>;
 
@@ -37,3 +37,4 @@ export interface ISearchRequestProps {
   resultSearch: IResultSearch;
   setResultSearch: Dispatch<SetStateAction<IResultSearch>>;
 }
+export type THeaderItem = 'home' | 'about';
