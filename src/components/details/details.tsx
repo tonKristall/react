@@ -5,7 +5,7 @@ import ResponseAPI from '../../services/response-api';
 import { TUrlParams } from '../../types';
 import './details.scss';
 
-export default function DetailsHead(): JSX.Element {
+export default function Details(): JSX.Element {
   const params: TUrlParams = useParams();
   const [resultSearchDetails, setResultSearchDetails] = useState(SEARCH_RESULT_DEFAULT);
   const [searchDataDetails, setSearchDataDetails] = useState({ ...SEARCH_DATA_DEFAULT, value: params.title });

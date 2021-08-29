@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import { IRenderResultSearchProps } from '../../types';
 import './result-search.scss';
 import SelectPage from './select-page';

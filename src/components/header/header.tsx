@@ -1,34 +1,21 @@
-import React, { MouseEvent, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { HEADER_ACTIVE_DEFAULT } from '../../const';
-import { THeaderItem } from '../../types';
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { HEADER_LINK } from '../../const';
 import './header.scss';
 
 export default function Header(): JSX.Element {
-  const [active, setActive] = useState(HEADER_ACTIVE_DEFAULT);
-
-  const handleClick = (event: MouseEvent) => {
-    const linkName = (event.target as HTMLElement).textContent as THeaderItem;
-    if (!active[linkName]) {
-      const resetActive: typeof HEADER_ACTIVE_DEFAULT = { ...active };
-      const arrActive = Object.keys(resetActive);
-      arrActive.forEach((element) => {
-        resetActive[element as THeaderItem] = false;
-      });
-      setActive({ ...resetActive, [linkName]: true });
-    }
-  };
+  const location = useLocation();
 
   return (
     <header className="header">
-      <ul onClick={handleClick}>
+      <ul>
         <li>
-          <Link className={active.home ? 'link link__active' : 'link'} to="/">
+          <Link className={location.pathname === HEADER_LINK.home ? 'link link__active' : 'link'} to="/">
             home
           </Link>
         </li>
         <li>
-          <Link className={active.about ? 'link link__active' : 'link'} to="/about">
+          <Link className={location.pathname === HEADER_LINK.about ? 'link link__active' : 'link'} to="/about">
             about
           </Link>
         </li>

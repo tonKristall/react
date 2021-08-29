@@ -13,3 +13,23 @@
   min-height: 100vh;
   background-color: #c0dc92;
 }
+
+.main {
+  @include flex-column(flex-start, center);
+  width: 100%;
+}
+
+.fade-enter {
+  opacity: 0;
+  transform: translateY(300px);
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 250ms ease-in;
+}
+
+.fade-exit {
+  opacity: 0;
+}

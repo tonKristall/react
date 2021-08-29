@@ -22,7 +22,6 @@ export default function SearchBar(props: ISearchRequestProps): JSX.Element {
     <div className="search-bar">
       <form className="search-bar__wrapper" onSubmit={handleSubmit}>
         <input
-          id="search"
           type="text"
           className="search-bar__input"
           disabled={props.searchData.loading}
