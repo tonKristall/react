@@ -27,8 +27,8 @@ export default function RenderResultSearch(props: IRenderResultSearchProps): JSX
               <td>url details</td>
             </tr>
           </thead>
-          {articles.map((article) => (
-            <tbody>
+          {articles.map((article, index) => (
+            <tbody key={index}>
               <tr className="article">
                 <td>
                   <a href={article.url}>{article.title}</a>
