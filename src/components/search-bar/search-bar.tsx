@@ -6,6 +6,7 @@ import './search-bar.scss';
 
 export default function SearchBar(props: ISearchRequestProps): JSX.Element {
   const [validate, setValidate] = useState(true);
+
   const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!props.searchData.loading) {

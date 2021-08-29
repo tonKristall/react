@@ -4,15 +4,15 @@ import { IRenderResultSearchProps } from '../../types';
 import './select-page.scss';
 
 export default function SelectPage(props: IRenderResultSearchProps): JSX.Element {
-  const numberPage = Math.ceil(MAX_ARTICLES / Number(props.SearchData.pageSize));
+  const numberPage = Math.ceil(MAX_ARTICLES / Number(props.searchData.pageSize));
 
   const HandleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const nextPage = event.target.value;
     const validatePage = event.target.validity.valid;
     const timerChangePage = setTimeout(() => {
-      props.SetSearchData({ ...props.SearchData, currentPage: nextPage, inputPage: nextPage });
+      props.setSearchData({ ...props.searchData, currentPage: nextPage, inputPage: nextPage });
     }, 2000);
-    props.SetSearchData({ ...props.SearchData, inputPage: nextPage });
+    props.setSearchData({ ...props.searchData, inputPage: nextPage });
     setTimeout(() => {
       if (!validatePage || !nextPage || nextPage !== event.target.value) {
         clearTimeout(timerChangePage);
@@ -25,11 +25,11 @@ export default function SelectPage(props: IRenderResultSearchProps): JSX.Element
       <span>Page</span>
       <input
         type="number"
-        value={props.SearchData.inputPage}
+        value={props.searchData.inputPage}
         min={SEARCH_DATA_DEFAULT.value}
         max={numberPage}
         onChange={HandleChange}
-        disabled={props.SearchData.loading}
+        disabled={props.searchData.loading}
       />
       <span>of {numberPage}</span>
     </div>

@@ -8,6 +8,7 @@ const { copyFile } = require('fs');
 const esLintPlugin = (isDev) => isDev ? [] : [new ESLintPlugin({ extensions: ['ts', 'js'] })];
 const devServer = (isDev) => !isDev ? {} : {
   devServer: {
+    historyApiFallback: true,
     open: true,
     hot: true,
     port: 8080,

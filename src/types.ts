@@ -13,8 +13,6 @@ export interface IArticle {
   description: string;
   publishedAt: string;
   source: { id: string; name: string };
-  id: null;
-  name: string;
   title: string;
   url: string;
   urlToImage: string;
@@ -26,9 +24,9 @@ export interface IResultSearch {
 }
 
 export interface IRenderResultSearchProps {
-  SearchData: typeof SEARCH_DATA_DEFAULT;
-  SetSearchData: TSetStateSearchData;
-  ResultSearch: IResultSearch;
+  searchData: typeof SEARCH_DATA_DEFAULT;
+  setSearchData: TSetStateSearchData;
+  resultSearch: IResultSearch;
 }
 
 export interface ISearchRequestProps {
@@ -38,3 +36,12 @@ export interface ISearchRequestProps {
   setResultSearch: Dispatch<SetStateAction<IResultSearch>>;
 }
 export type THeaderItem = 'home' | 'about';
+
+export interface IDetailsProps {
+  setSearchData: TSetStateSearchData;
+  resultSearch: IResultSearch;
+}
+
+export type TUrlParams = {
+  title: string;
+};

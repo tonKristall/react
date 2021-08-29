@@ -1,0 +1,15 @@
+@import '../../mixins.scss';
+
+.details {
+  @include flex-column(center, center);
+  p {
+    margin: 0 auto;
+    width: 90%;
+  }
+  img {
+    width: 90%;
+  }
+  a {
+    text-transform: capitalize;
+  }
+}

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { HashRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  HashRouter as Router, Switch, Route,
+} from 'react-router-dom';
 import RenderResultSearch from './result-search/result-search';
 import SearchBar from './search-bar/search-bar';
 import '../styles.scss';
@@ -7,6 +9,7 @@ import { SEARCH_DATA_DEFAULT, SEARCH_RESULT_DEFAULT } from '../const';
 import ResponseAPI from '../services/response-api';
 import Header from './header/header';
 import About from './page-about/about';
+import Details from './details/details';
 
 export default function AppContainer(): JSX.Element {
   const [resultSearch, setResultSearch] = useState(SEARCH_RESULT_DEFAULT);
@@ -30,17 +33,17 @@ export default function AppContainer(): JSX.Element {
               resultSearch={resultSearch}
               setResultSearch={setResultSearch}
             />
-            <RenderResultSearch SearchData={searchData} SetSearchData={setSearchData} ResultSearch={resultSearch} />
+            <RenderResultSearch searchData={searchData} setSearchData={setSearchData} resultSearch={resultSearch} />
           </Route>
           <Route exact path="/about">
             <About />
           </Route>
+          <Route path="/details/:title">
+            <Details />
+          </Route>
           <Route path="*">
             <div>404</div>
           </Route>
-          {/* <Route path="/article/:id">
-            <Article />
-          </Route> */}
         </Switch>
       </div>
     </Router>

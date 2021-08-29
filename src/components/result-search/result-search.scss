@@ -31,6 +31,10 @@
   img {
     width: 200px;
   }
+  td a {
+    text-transform: capitalize;
+    text-decoration: none;
+  }
 }
 
 .error-response {

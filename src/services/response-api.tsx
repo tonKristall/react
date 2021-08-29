@@ -14,32 +14,34 @@ export default function ResponseAPI(
   const { currentPage } = searchData;
   const response = `
     ${BASE_URL}?q=${searchValue}&sortBy=${sortValue}&pageSize=${pageSizeValue}&page=${currentPage}&apiKey=${API_KEY}`;
-  fetch(response)
-    .then((resp) => resp.json())
-    .then((resp: IResultSearch) => {
-      if (resp.articles) {
-        setResultSearch({
-          error: false,
-          articles: resp.articles,
-        });
-      } else {
+  if (searchValue) {
+    fetch(response)
+      .then((resp) => resp.json())
+      .then((resp: IResultSearch) => {
+        if (resp.articles) {
+          setResultSearch({
+            error: false,
+            articles: resp.articles,
+          });
+        } else {
+          setResultSearch({
+            error: true,
+            articles: resultSearch.articles,
+          });
+        }
+      })
+      .catch(() => {
         setResultSearch({
           error: true,
           articles: resultSearch.articles,
         });
-      }
-    })
-    .catch(() => {
-      setResultSearch({
-        error: true,
-        articles: resultSearch.articles,
+      })
+      .finally(() => {
+        setSearchData({
+          ...searchData,
+          loading: SEARCH_DATA_DEFAULT.loading,
+          requestRun: true,
+        });
       });
-    })
-    .finally(() => {
-      setSearchData({
-        ...searchData,
-        loading: SEARCH_DATA_DEFAULT.loading,
-        requestRun: true,
-      });
-    });
+  }
 }
