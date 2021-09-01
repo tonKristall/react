@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { changeArticles } from '../../services/redux/response-reducer';
+import { changeDetails } from '../../services/redux/actions';
 import { TRootState } from '../../services/redux/types-redux';
 import { IArticle } from '../../types';
 import './result-search.scss';
@@ -15,7 +15,7 @@ export default function RenderResultSearch(): JSX.Element {
   const loading = useSelector((state: TRootState) => state.stateAppReducer.loading);
 
   const handleClick = () => {
-    dispatch(changeArticles([]));
+    dispatch(changeDetails([]));
   };
 
   if (errorRequest) {

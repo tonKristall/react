@@ -1,6 +1,6 @@
 import { ERequestReducer } from '../../const';
-import { IArticle } from '../../types';
-import { TActions, TRootState } from './types-redux';
+import { responseSlice } from './response-reducer';
+import { TActions } from './types-redux';
 
 export const changeValue = (payload: string): TActions => ({ type: ERequestReducer.changeValue, payload });
 export const changeInputPage = (payload: string): TActions => ({ type: ERequestReducer.changeInputPage, payload });
@@ -12,6 +12,6 @@ export const changeValidate = (payload: boolean): TActions => ({ type: ERequestR
 export const changeLoading = (payload: boolean): TActions => ({ type: ERequestReducer.changeLoading, payload });
 export const changeRequestRun = (payload: boolean): TActions => ({ type: ERequestReducer.changeRequestRun, payload });
 
-export const errorResponse = (state: TRootState): boolean => state.responseReducer.error;
-export const articlesResponse = (state: TRootState): IArticle[] => state.responseReducer.articles;
-export const detailsResponse = (state: TRootState): IArticle[] => state.responseReducer.details;
+export const changeErrorRequest = responseSlice.actions.changeError;
+export const { changeArticles } = responseSlice.actions;
+export const { changeDetails } = responseSlice.actions;

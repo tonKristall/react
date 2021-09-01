@@ -15,7 +15,3 @@ export const responseSlice = createSlice({
 });
 
 export const responseReducer = responseSlice.reducer;
-
-export const changeErrorRequest = responseSlice.actions.changeError;
-export const { changeArticles } = responseSlice.actions;
-export const { changeDetails } = responseSlice.actions;

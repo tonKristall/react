@@ -1,7 +1,8 @@
 import { API_KEY, APP_STATE_DEFAULT, BASE_URL } from '../const';
 import { IResultSearch } from '../types';
-import { changeLoading, changeRequestRun } from './redux/actions';
-import { changeArticles, changeDetails, changeErrorRequest } from './redux/response-reducer';
+import {
+  changeArticles, changeDetails, changeErrorRequest, changeLoading, changeRequestRun,
+} from './redux/actions';
 import { TAppDispatch } from './redux/types-redux';
 
 export default function ResponseAPI(
