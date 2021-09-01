@@ -1,17 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { SEARCH_DATA_DEFAULT, SEARCH_RESULT_DEFAULT } from '../../const';
+import { TAppDispatch, TRootState } from '../../services/redux/types-redux';
 import ResponseAPI from '../../services/response-api';
 import { TUrlParams } from '../../types';
 import './details.scss';
 
 export default function Details(): JSX.Element {
+  const dispatch = useDispatch<TAppDispatch>();
   const params: TUrlParams = useParams();
-  const [resultSearchDetails, setResultSearchDetails] = useState(SEARCH_RESULT_DEFAULT);
-  const [searchDataDetails, setSearchDataDetails] = useState({ ...SEARCH_DATA_DEFAULT, value: params.title });
-  const articleDetails = resultSearchDetails.articles[0];
+  const articleDetails = useSelector((state: TRootState) => state.responseReducer.details[0]);
+  const loading = useSelector((state: TRootState) => state.stateAppReducer.loading);
+  const sort = useSelector((state: TRootState) => state.requestReducer.sortArticle);
+  const currentPage = useSelector((state: TRootState) => state.requestReducer.currentPage);
+  const pageSize = useSelector((state: TRootState) => state.requestReducer.pageSize);
+
   useEffect(() => {
-    ResponseAPI(setSearchDataDetails, searchDataDetails, setResultSearchDetails, resultSearchDetails);
+    ResponseAPI(dispatch, `"${params.title}"`, sort, pageSize, currentPage, true);
   }, [params.title]);
 
   if (articleDetails) {
@@ -28,7 +33,8 @@ export default function Details(): JSX.Element {
         </p>
       </div>
     );
-  } if (searchDataDetails.loading) {
+  }
+  if (loading) {
     return <div>Loading</div>;
   }
   return <div className="error-response">error response</div>;

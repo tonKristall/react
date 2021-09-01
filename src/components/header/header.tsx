@@ -1,23 +1,21 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { HEADER_LINK } from '../../const';
+import { NavLink } from 'react-router-dom';
+import { EHeaderLink } from '../../const';
 import './header.scss';
 
 export default function Header(): JSX.Element {
-  const location = useLocation();
-
   return (
     <header className="header">
       <ul>
         <li>
-          <Link className={location.pathname === HEADER_LINK.home ? 'link link__active' : 'link'} to="/">
+          <NavLink exact className={'link'} activeClassName={'link__active'} to={EHeaderLink.home}>
             home
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link className={location.pathname === HEADER_LINK.about ? 'link link__active' : 'link'} to="/about">
+          <NavLink exact className={'link'} activeClassName={'link__active'} to={EHeaderLink.about}>
             about
-          </Link>
+          </NavLink>
         </li>
       </ul>
     </header>

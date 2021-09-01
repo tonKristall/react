@@ -1,20 +1,37 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { EPageSizeValues, ESortValues, SEARCH_DATA_DEFAULT } from '../../const';
-import { ISearchRequestProps } from '../../types';
+import {
+  changeCurrentPage, changeInputPage, changePageSize, changeSort,
+} from '../../services/redux/actions';
+import { TAppDispatch, TRootState } from '../../services/redux/types-redux';
+import ResponseAPI from '../../services/response-api';
 import './request-params.scss';
 
-export default function RequestParams(props: ISearchRequestProps): JSX.Element {
+export default function RequestParams(): JSX.Element {
+  const dispatch = useDispatch<TAppDispatch>();
+  const loading = useSelector((state: TRootState) => state.stateAppReducer.loading);
+  const sort = useSelector((state: TRootState) => state.requestReducer.sortArticle);
+  const currentPage = useSelector((state: TRootState) => state.requestReducer.currentPage);
+  const requestRun = useSelector((state: TRootState) => state.stateAppReducer.requestRun);
+  const searchValue = useSelector((state: TRootState) => state.requestReducer.value);
+  const pageSize = useSelector((state: TRootState) => state.requestReducer.pageSize);
+
+  useEffect(() => {
+    if (requestRun) {
+      ResponseAPI(dispatch, searchValue, sort, pageSize, currentPage, false);
+    }
+  }, [sort, currentPage, pageSize]);
+
   return (
     <div className="request-params">
       <div className="request-params__sort">
         <p>Sort:</p>
         <select
-          disabled={props.searchData.loading}
+          value={sort}
+          disabled={loading}
           onChange={(event) => {
-            props.setSearchData({
-              ...props.searchData,
-              sortArticle: event.target.value,
-            });
+            dispatch(changeSort(event.target.value));
           }}
         >
           <option value={ESortValues.published}>{ESortValues.published}</option>
@@ -25,14 +42,12 @@ export default function RequestParams(props: ISearchRequestProps): JSX.Element {
       <div className="request-params__articles-on-page">
         <p>articles on page:</p>
         <select
-          disabled={props.searchData.loading}
+          value={pageSize}
+          disabled={loading}
           onChange={(event) => {
-            props.setSearchData({
-              ...props.searchData,
-              pageSize: event.target.value,
-              currentPage: SEARCH_DATA_DEFAULT.currentPage,
-              inputPage: SEARCH_DATA_DEFAULT.inputPage,
-            });
+            dispatch(changePageSize(event.target.value));
+            dispatch(changeCurrentPage(SEARCH_DATA_DEFAULT.currentPage));
+            dispatch(changeInputPage(SEARCH_DATA_DEFAULT.inputPage));
           }}
         >
           <option value={EPageSizeValues.ten}>{EPageSizeValues.ten}</option>

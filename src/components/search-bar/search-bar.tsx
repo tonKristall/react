@@ -1,21 +1,36 @@
-import React, { ChangeEvent, useState } from 'react';
-import Validation from '../../services/validate';
-import { ISearchRequestProps } from '../../types';
+import React, { ChangeEvent } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeRequestRun, changeValidate, changeValue } from '../../services/redux/actions';
+import { TAppDispatch, TRootState } from '../../services/redux/types-redux';
+import ResponseAPI from '../../services/response-api';
 import RequestParams from '../request-params/request-params';
 import './search-bar.scss';
 
-export default function SearchBar(props: ISearchRequestProps): JSX.Element {
-  const [validate, setValidate] = useState(true);
+export default function SearchBar(): JSX.Element {
+  const dispatch = useDispatch<TAppDispatch>();
+  const validate = useSelector((state: TRootState) => state.stateAppReducer.validate);
+  const loading = useSelector((state: TRootState) => state.stateAppReducer.loading);
+  const searchValue = useSelector((state: TRootState) => state.requestReducer.value);
+  const sortValue = useSelector((state: TRootState) => state.requestReducer.sortArticle);
+  const pageSizeValue = useSelector((state: TRootState) => state.requestReducer.pageSize);
+  const currentPage = useSelector((state: TRootState) => state.requestReducer.currentPage);
 
   const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!props.searchData.loading) {
-      Validation(props.searchData, setValidate, props.setSearchData, props.setResultSearch, props.resultSearch);
+    dispatch(changeRequestRun(true));
+    if (!loading) {
+      if (searchValue) {
+        dispatch(changeValidate(true));
+        ResponseAPI(dispatch, searchValue, sortValue, pageSizeValue, currentPage, false);
+      } else {
+        dispatch(changeValidate(false));
+        dispatch(changeRequestRun(false));
+      }
     }
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    props.setSearchData({ ...props.searchData, value: event.target.value });
+    dispatch(changeValue(event.target.value));
   };
 
   return (
@@ -24,20 +39,16 @@ export default function SearchBar(props: ISearchRequestProps): JSX.Element {
         <input
           type="text"
           className="search-bar__input"
-          disabled={props.searchData.loading}
+          value={searchValue}
+          disabled={loading}
           onChange={handleChange}
         ></input>
         <button className="search-bar__button" type="submit">
-          {!props.searchData.loading ? 'search' : 'loading'}
+          {!loading ? 'search' : 'loading'}
         </button>
       </form>
       <span className="invalid-validation">{!validate && "It's required field"} </span>
-      <RequestParams
-        searchData={props.searchData}
-        setSearchData={props.setSearchData}
-        resultSearch={props.resultSearch}
-        setResultSearch={props.setResultSearch}
-      />
+      <RequestParams />
     </div>
   );
 }
