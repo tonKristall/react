@@ -3,7 +3,8 @@
   "scripts": {
     "build": "webpack",
     "dev": "webpack serve --env development",
-    "lint": "eslint --fix src"
+    "lint": "eslint --fix src",
+    "test": "npx jest tests"
   },
   "devDependencies": {
     "@types/react-transition-group": "4.4.2",
@@ -28,10 +29,14 @@
     "webpack-dev-server": "3.11.2"
   },
   "dependencies": {
+    "@babel/preset-env": "^7.15.4",
+    "@babel/preset-typescript": "^7.15.0",
     "@reduxjs/toolkit": "1.6.1",
+    "@types/jest": "^27.0.1",
     "@types/react": "17.0.16",
     "@types/react-dom": "17.0.9",
     "@types/react-router-dom": "5.1.8",
+    "jest": "^27.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-redux": "7.2.4",
