@@ -1,0 +1,38 @@
+@import '../../mixins.scss';
+
+.result-search {
+  margin-top: 50px;
+  width: 100%;
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  &__headers {
+    width: 100%;
+
+    td {
+      text-align: center;
+      text-transform: capitalize;
+      font-size: 18px;
+    }
+  }
+
+  td {
+    border: 1px solid black;
+    text-align: center;
+  }
+}
+
+.article {
+  width: 100%;
+
+  img {
+    width: 200px;
+  }
+}
+
+.error-response {
+  color: red;
+}
