@@ -1,0 +1,28 @@
+@import '../../mixins.scss';
+.request-params {
+  @include flex-row(space-between, center);
+
+  p {
+    margin: 0;
+    margin-right: 10px;
+    font-size: 20px;
+    text-transform: capitalize;
+  }
+
+  &__sort,
+  &__articles-on-page {
+    @include flex-row(center, center);
+    margin: 0 10px;
+
+    option {
+      @include flex-column(center, center);
+      width: 220px;
+      text-transform: capitalize;
+    }
+
+    div {
+      @include flex-row(space-around, center);
+      width: 100%;
+    }
+  }
+}
