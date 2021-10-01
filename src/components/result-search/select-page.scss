@@ -1,0 +1,16 @@
+@import '../../mixins.scss';
+
+.select-page {
+  margin-bottom: 50px;
+  @include flex-row(center, center);
+
+  span {
+    padding: 0 10px;
+    font-size: 20px;
+  }
+  
+  input {
+    width: 100px;
+    text-align: center;
+  }
+}
